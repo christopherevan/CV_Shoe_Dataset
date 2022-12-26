@@ -8,7 +8,13 @@ import numpy as np
 from skimage import transform
 
 st.title('Shoe Prediction')
-uploaded_file = st.file_uploader("Choose a file")
+st.subheader('Upload an image of a shoe to predict between one of these classes below:')
+st.caption('- Ballet Flat')
+st.caption('- Boat')
+st.caption('- Brogue')
+st.caption('- Clog')
+st.caption('- Sneaker')
+uploaded_file = st.file_uploader("Choose a file", type=['png', 'jpg'])
 if uploaded_file is not None:
     img = Image.open(uploaded_file)
     np_image = np.array(img).astype('float32')
@@ -21,8 +27,11 @@ if uploaded_file is not None:
     3: 'Clog',
     4: 'Sneaker'}
     
-    model = load_model('eff_b0_shoe.h5')
-    y_pred = model.predict(np_image)
+    with st.spinner("Please wait..."):
+        model = load_model('eff_b0_shoe.h5')
+        y_pred = model.predict(np_image)
     y_class = [np.argmax(element) for element in y_pred]
-    res = dict[y_class[0]], "- Confidence:", y_pred[0][y_class[0]]*100
+    conf = y_pred[0][y_class[0]]*100
+    res = dict[y_class[0]], "- Confidence:", round(conf, 3), "%"
+    st.image(np_image)
     st.success(res)
