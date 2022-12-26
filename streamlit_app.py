@@ -14,7 +14,7 @@ st.caption('- Boat')
 st.caption('- Brogue')
 st.caption('- Clog')
 st.caption('- Sneaker')
-uploaded_file = st.file_uploader("Choose a file", type=['png', 'jpg'])
+uploaded_file = st.file_uploader("Choose a file", type=['png', 'jpg', 'jpeg'])
 if uploaded_file is not None:
     img = Image.open(uploaded_file)
     np_image = np.array(img).astype('float32')
