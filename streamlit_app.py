@@ -32,6 +32,7 @@ if uploaded_file is not None:
         y_pred = model.predict(np_image)
     y_class = [np.argmax(element) for element in y_pred]
     conf = y_pred[0][y_class[0]]*100
-    res = dict[y_class[0]] + "- Confidence:" + round(conf, 3) + "%"
+    # res = dict[y_class[0]] + "- Confidence:" + round(conf, 3) + "%"
+    res = "Prediction result: %s - Confidence: %s%" % (dict[y_class[0]], round(conf, 4))
     st.image(img)
     st.success(res)
