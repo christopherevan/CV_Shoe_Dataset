@@ -27,11 +27,11 @@ if uploaded_file is not None:
     3: 'Clog',
     4: 'Sneaker'}
     
-    with st.spinner("Please wait..."):
+    with st.spinner("Predicting..."):
         model = load_model('eff_b0_shoe.h5')
         y_pred = model.predict(np_image)
     y_class = [np.argmax(element) for element in y_pred]
     conf = y_pred[0][y_class[0]]*100
     res = dict[y_class[0]], "- Confidence:", round(conf, 3), "%"
-    st.image(np_image)
+    st.image(img)
     st.success(res)
