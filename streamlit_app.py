@@ -8,6 +8,7 @@ import numpy as np
 from skimage import transform
 
 st.title('Shoe Prediction')
+st.code('Using Transfer Learning - EfficientNetB0')
 st.subheader('Upload an image of a shoe to predict between one of these classes below:')
 st.caption('- Ballet Flat')
 st.caption('- Boat')
@@ -33,6 +34,6 @@ if uploaded_file is not None:
     y_class = [np.argmax(element) for element in y_pred]
     conf = y_pred[0][y_class[0]]*100
     # res = dict[y_class[0]] + "- Confidence:" + round(conf, 3) + "%"
-    res = "Prediction result: {} - Confidence: {}%".format(dict[y_class[0]], round(conf, 4))
+    res = "Prediction result: {} - Confidence: {}%".format(dict[y_class[0]], round(conf, 3))
     st.image(img)
     st.success(res)
